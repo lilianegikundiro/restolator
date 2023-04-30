@@ -1,0 +1,41 @@
+{% comment %} {% extends 'inventory/base.html' %} {% endcomment %}
+
+{% block content %}
+<div class="uk-grid-match uk-margin-remove-left" uk-grid>
+
+	<div class="uk-width-1-6@m uk-invisible"></div>
+
+	<div class="uk-width-expand uk-padding-remove">
+		<table class="uk-table uk-table-middle uk-table-divider">
+			<thead>
+				<tr>
+					<th>Dish</th>
+					<th>Consist</th>
+					<th>Price</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in object_list %}
+				<tr>
+					<td><h3>{{ item.recipe }}</h3></td>
+					<td><button class="uk-button uk-button-default uk-button-small" href="#" disabled>Ingredients</button></td>
+					<td>{{ item.price }}</td>
+					<td>
+						<div class="uk-button-group">
+							<button class="uk-button uk-button-default uk-button-small" href="{% url 'update_menu' %}">Edit</button>
+							
+							<button class="uk-button uk-button-default uk-button-small" href="{% url 'delete_menu' %}">Delete</button>
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a class="uk-button uk-button-secondary uk-button-small" href="{% url 'create_menu' %}">Add new Recipe</a>
+	</div>
+
+	<div class="uk-width-1-6@m uk-invisible"></div>
+
+</div>
+{% endblock %}
