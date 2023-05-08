@@ -127,65 +127,20 @@ def LogoutUser(request):
 def pageNotFound(request, exception):
 	return HttpResponseNotFound('<h1>ERROR 404</h1><br><p>Page Not Found</p>')
 
+class RecipeRequirementView(ListView):
+	model = RecipeRequirement
+	template_name = 'inventory/reciperequirement.html'
 
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		return context
 
+class RecipeRequirementCreateView(LoginRequiredMixin, CreateView):
+	model = RecipeRequirement
+	form_class = RecipeRequirementForm
+	template_name = 'inventory/create_reciperequirement.html'
+	success_url = reverse_lazy('reciperequirement')
 
-# class PurchaseView(LoginRequiredMixin, ListView):
-# 	model = Purchase
-# 	template_name = 'inventory/purchase.html'
-
-# 	def get_context_data(self, **kwargs):
-# 		context = super().get_context_data(**kwargs)
-		
-
-# 		return context
-
-
-# class PurchaseCreateView(LoginRequiredMixin, CreateView):
-# 	model = Purchase
-# 	form_class = PurchaseForm
-# 	template_name = 'inventory/create_purchase.html'
-# 	success_url = reverse_lazy('purchase')
-
-# 	def get_context_data(self, **kwargs):
-# 		context = super().get_context_data(**kwargs)
-# 		context['menu_items'] = MenuItem.objects.all()
-		
-
-# 		return context
-	
-# 	def form_valid(self, form):
-# 		form.instance.client = self.request.user
-# 		res = super().form_valid(form)
-# 		form.instance.modify_inventory					# we already checked in PurchaseForm.clean() that we have enough ingredients, now we can modify their quantity after this purchase	
-# 		form.save()
-
-# 		return res
-
-# class PurchaseDeleteView(LoginRequiredMixin, DeleteView):
-# 	model = Purchase
-# 	template_name = 'inventory/delete_confirm.html'
-# 	success_url = reverse_lazy('purchase')
-
-# 	def get_context_data(self, **kwargs):
-# 		context = super().get_context_data(**kwargs)
-# 		mixin_context = self.get_user_context(title='Add Purchase', select=2)
-
-# 		return dict(list(context.items()) + list(mixin_context.items()))
-
-# class FinanceView(LoginRequiredMixin, TemplateView):
-# 	template_name = 'inventory/bookkeeping.html'
-
-# 	def get_context_data(self, **kwargs):
-# 		context = super().get_context_data(**kwargs)
-# 		revenue = 0
-# 		expenses = 0
-# 		for p in Purchase.objects.all():
-# 			expenses += p.total_expenses
-# 			revenue += p.total_price
-# 		context['total_revenue'] = revenue
-# 		context['total_expenses'] = expenses
-# 		context['total_profit'] = revenue - expenses
-		
-
-# 		return context
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		return context

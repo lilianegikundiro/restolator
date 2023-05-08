@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html id="main">
+
+	<head>
+
+		<meta charset="UTF-8">
+		<title>{{ title }}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load bootstrap5 %}
+        {% load bootstrap_icons %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        
+        {% comment %} <link rel="stylesheet" href="{% static 'inventory/css/uikit.min.css' %}" />
+        <script src="{% static 'inventory/js/uikit.min.js' %}"></script>
+        <script src="{% static 'inventory/js/uikit-icons.min.js' %}"></script> {% endcomment %}
+
+	</head>
+
+    <!--Main Navigation-->
+<header>
+    <!-- Sidebar -->
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+      <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-4">
+          
+          <a href="menu" class="list-group-item list-group-item-action py-2 ripple active">
+            <i class="fas fa-chart-area fa-fw me-3"></i><span>Menu</span>
+          </a>
+          <a href="inventory" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fas fa-lock fa-fw me-3"></i><span>Ingredients</span></a>
+          <a href="reciperequirement" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fas fa-chart-line fa-fw me-3"></i><span>Ingredient Use</span></a>
+
+        </div>
+      </div>
+    </nav>
+    <!-- Sidebar -->
+  
+    <!-- Navbar -->
+   
+            
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+  </header>
+  <!--Main Navigation-->
+  
+  <!--Main layout-->
+  <main style="margin-top: 58px;">
+    <div class="container pt-1"></div>
+  </main>
+  <!--Main layout-->
+
+	
+
+		{% block mainmenu %}
+		<nav class="uk-navbar-container uk-visible@m" uk-navbar>
+			<div class="uk-navbar-center">
+				<ul class="uk-navbar-nav">
+					{% for m in nav_menu %}
+					{% if select != m %}
+					<li><a class="uk-text-bold" href="{% url m.url_name %}">{{ m.title }}</a></li>
+					{% else %}
+					<li class="uk-active"><a class="uk-text-bold" href="{% url m.url_name %}">{{ m.title }}</a></li>
+					{% endif %}
+					{% endfor %}
+				</ul>
+			</div>
+
+			<div class="uk-navbar-right">
+				{% if request.user.is_authenticated %}
+				<ul class="uk-navbar-nav">
+					<li>{% bs_icon 'alarm' size='1.5em' %}<span ><a class="uk-text-bold" href="#">{{ user.username }}</span></a></li>
+					<li><a class="uk-text-bold" href="{% url 'logout' %}">Sign out</a></li>
+				</ul>
+				{% else %}
+				<ul class="uk-navbar-nav">
+					<li><a class="uk-text-bold" href="{% url 'login' %}">Sign in</a></li>
+					<li><a class="uk-text-bold" href="{% url 'registration' %}">Sign up</a></li>
+				</ul>
+				{% endif %}
+			</div>
+		</nav>
+		{% endblock mainmenu %}
+
+		<div class="uk-padding">
+
+			{% block content %}
+			{% endblock %}
+
+		</div>
+
+		<div uk-height-viewport="expand: true"></div>
+
+		<footer class="uk-background-secondary">
+			<div class="uk-card uk-card-secondary uk-card-body uk-text-center uk-position-z-index" uk-sticky="position: bottom;">
+				<hr />
+				<p class="uk-margin-left uk-margin-remove-top">Created by Restolator. 
+				Powered by <a href="https://www.djangoproject.com/" target="_blank">Django</a>, <a href="https://getuikit.com/" target="_blank">BootStrap</a>.</p>
+			</div>
+		</footer>
+
+	</body>
+
+</html>

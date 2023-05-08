@@ -1,4 +1,9 @@
-{% comment %} {% extends 'inventory/base.html' %} {% endcomment %}
+{% extends 'inventory/base.html' %}
+{% load static %}
+{% block head %} 
+<link rel="stylesheet" href="{% static 'inventory/style.css' %}">
+{% endblock %}
+
 
 {% block content %}
 <div class="uk-grid-match uk-margin-remove-left" uk-grid>
@@ -19,8 +24,10 @@
 				{% for item in object_list %}
 				<tr>
 					<td><h3>{{ item.recipe }}</h3></td>
-					<td><button class="uk-button uk-button-default uk-button-small" href="#" disabled>Ingredients</button></td>
+					<td>{{ item.ingredients }}</td>
+					{% comment %} <td><button class="uk-button uk-button-default uk-button-small" href="#" disabled>Ingredients</button></td> {% endcomment %}
 					<td>{{ item.price }}</td>
+					
 					<td>
 						<div class="uk-button-group">
 							<button class="uk-button uk-button-default uk-button-small" href="{% url 'update_menu' %}">Edit</button>
@@ -38,4 +45,13 @@
 	<div class="uk-width-1-6@m uk-invisible"></div>
 
 </div>
+
+<div class="uk-grid-match uk-margin-remove-left" uk-grid>
+
+	<div class="uk-width-1-6@m uk-invisible"></div>
+
+	<div class="uk-width-expand uk-padding-remove">
+
+
+	
 {% endblock %}
