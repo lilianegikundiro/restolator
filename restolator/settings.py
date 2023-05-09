@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-e&sg(mnp*yjs_+-l1s36c07t4tjuxoc_3t2d&r3#lssq*n^lkr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -85,10 +85,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'restolator',
-        'USER': 'myrestolatoruser',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '',
+        'USER': 'restolator_user',
+        'PASSWORD': 'FhViU46bVTXi0iS2nzk3JgcpX6aACGxo',
+        'HOST': 'dpg-chd25fjhp8u0166ago00-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
