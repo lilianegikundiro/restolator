@@ -17,24 +17,25 @@
 					<th>Dish</th>
 					<th>Consist</th>
 					<th>Price</th>
-					<th>Actions</th>
+					{% comment %} <th>Actions</th> {% endcomment %}
 				</tr>
 			</thead>
 			<tbody>
 				{% for item in object_list %}
 				<tr>
 					<td><h3>{{ item.recipe }}</h3></td>
-					<td>{{ item.ingredients }}</td>
-					{% comment %} <td><button class="uk-button uk-button-default uk-button-small" href="#" disabled>Ingredients</button></td> {% endcomment %}
+					{% comment %} <td>{{ item.ingredients }}</td> {% endcomment %}
+					{% comment %} <td><button class="uk-button uk-button-default uk-button-small" href="{% url 'reciperequirement' reciperequirement.pk %}">Ingredients</button></td> {% endcomment %}
+					<td><a class="uk-button uk-button-default uk-button-small" href="{% url 'reciperequirement' %}">View Ingredients</a></td>
 					<td>{{ item.price }}</td>
 					
-					<td>
-						<div class="uk-button-group">
-							<button class="uk-button uk-button-default uk-button-small" href="{% url 'update_menu' %}">Edit</button>
+					{% comment %} <td> {% endcomment %}
+						{% comment %} <div class="uk-button-group">
+							<button class="uk-button uk-button-default uk-button-small" href="{% url 'update_menu'%}">Edit</button>
 							
-							<button class="uk-button uk-button-default uk-button-small" href="{% url 'delete_menu' %}">Delete</button>
-						</div>
-					</td>
+							<button class="uk-button uk-button-default uk-button-small" href="{% url 'delete_menu'%}">Delete</button>
+						</div> {% endcomment %}
+					{% comment %} </td> {% endcomment %}
 				</tr>
 				{% endfor %}
 			</tbody>

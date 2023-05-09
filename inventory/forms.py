@@ -12,19 +12,9 @@ class IngredientForm(forms.ModelForm):
 		fields = '__all__'
   
 class MenuForm(forms.ModelForm):
-	recipe = forms.CharField(label='Menu Item', widget=forms.TextInput(attrs={'class': 'uk-input'}))
-	ingredients = forms.CharField(label='Ingredients', widget=forms.SelectMultiple(attrs={'class': 'uk-input'}))
-	price = forms.CharField(label='Selling Price', widget=forms.TextInput(attrs={'class': 'uk-input'}))
-	class Meta:
-		model = MenuItem
-		fields = ('recipe', 'ingredients','price')
-# class MenuForm(forms.ModelForm):
-# 	menu_item = forms.CharField(label='Menu Item', widget=forms.TextInput(attrs={'class': 'uk-input'}))
-# 	ingredient =forms.CharField(label='Ingredients', widget=forms.TextInput(attrs={'class': 'uk-input'}))
-    
-# 	class Meta:
-# 		model = RecipeRequirement
-# 		fields = '__all__'
+    class Meta:
+        model = MenuItem
+        fields = "__all__"
   
 class RegisterUserForm(UserCreationForm):
 	username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'uk-input'}))
@@ -39,11 +29,11 @@ class LoginUserForm(AuthenticationForm):
 	password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'uk-input'}))
  
 class RecipeRequirementForm(forms.ModelForm):
-	menu_item = forms.CharField(label='Menu Item', widget=forms.Select(attrs={'class': 'uk-input'}))
-	ingredient = forms.CharField(label='Ingredient', widget=forms.SelectMultiple(attrs={'class': 'uk-input'}))
-	quantity_required = forms.IntegerField(label="Required Ingredient",widget=forms.NumberInput(attrs={'class': 'uk-input'}))
-
-	class Meta:
-		model = RecipeRequirement
-		fields = '__all__'
+    class Meta:
+        model = RecipeRequirement
+        fields = "__all__"
 	
+class PurchaseForm(forms.ModelForm):
+    class Meta:
+        model = Purchase
+        fields = ['menu_item',]

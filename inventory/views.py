@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from django.shortcuts import render
 from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
@@ -15,9 +16,11 @@ from .forms import *
 class MenuView(ListView):
 	model = MenuItem
 	template_name = 'inventory/menu.html'
-
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
+ 
+	def get_context_data(self):
+		context= super().get_context_data()
+		context["menuitems"] = MenuItem.objects.all()
+		context["reqs"] = RecipeRequirement.objects.all()
 		return context
 
 class MenuCreateView(LoginRequiredMixin, CreateView):
@@ -144,3 +147,45 @@ class RecipeRequirementCreateView(LoginRequiredMixin, CreateView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		return context
+
+class PurchaseView(LoginRequiredMixin, ListView):
+    model = Purchase
+    template_name = "inventory/purchase_list.html"
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context["purchases"] = Purchase.objects.all()
+        return context
+class PurchaseCreateView(LoginRequiredMixin, TemplateView):
+    model = Purchase
+    template_name = "inventory/purchase_create.html"
+    form_class = PurchaseForm
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context["menu_items"] = [item for item in MenuItem.objects.all() if item.available()]
+        return context
+
+    def post(self, request):
+        menu_item_title = request.POST["menu_item"]
+        menu_item = MenuItem.objects.get(recipe=menu_item_title)
+        reqs = RecipeRequirement.objects.filter(menu_item=menu_item)
+        purchase = Purchase(menu_item=menu_item)
+        # Update ingredient quantity in inventory
+        for req in reqs:
+            req.ingredient.quantity -= req.quantity_required
+            req.ingredient.save()
+        purchase.save()
+        return redirect("/purchase")
+    
+
+class ReportView(LoginRequiredMixin, TemplateView):
+    template_name = "inventory/report.html"
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context["purchases"] = Purchase.objects.all()
+        context["revenues"] = [purchase.revenue() for purchase in Purchase.objects.all()]
+        context["costs"] = [purchase.cost() for purchase in Purchase.objects.all()]
+        context["profit"] = sum([purchase.profit() for purchase in Purchase.objects.all()])
+        return context

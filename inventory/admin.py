@@ -5,4 +5,4 @@ from inventory.models import *
 admin.site.register(Ingredient)
 admin.site.register(MenuItem)
 admin.site.register(RecipeRequirement)
-# admin.site.register(Purchase)
+admin.site.register(Purchase)

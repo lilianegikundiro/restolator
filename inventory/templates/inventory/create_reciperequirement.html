@@ -1,22 +1,14 @@
-{% comment %} {% extends 'inventory/base.html' %} {% endcomment %}
-
+{% comment %} {% extends 'base.html'%} {% endcomment %}
+{% load static %}
 {% block content %}
-<div class="uk-grid-match uk-margin-remove-left" uk-grid>
-
-	<div class="uk-width-1-6@m uk-invisible"></div>
-
-	<div class="uk-width-expand uk-padding-remove">
-		<form method="POST">
-			{% csrf_token %}
-			<fieldset class="uk-fieldset">
-				<legend class="uk-legend uk-text-bold">Add Requirements</legend>
-				{{ form.as_p }}
-			</fieldset>
-			<button class="uk-button uk-button-primary" type="submit">Add</button>
-		</form>
-	</div>
-
-	<div class="uk-width-1-6@m uk-invisible"></div>
-
-</div>
+<form method="post">
+  <div class="d-flex justify-content-center">
+    <h4>Add New Recipe Requirement:</h4>
+  </div>
+  <div>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+  </div>
+</form>
 {% endblock %}

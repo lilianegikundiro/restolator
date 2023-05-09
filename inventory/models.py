@@ -27,28 +27,53 @@ class MenuItem(models.Model):
    
    def __str__(self):
         return self.recipe
+    
+   def available(self):
+        return all(i.enough() for i in RecipeRequirement.objects.filter(menu_item=self.id))
+
+   def __str__(self):
+        return f"{self.recipe}"
    
 
 class RecipeRequirement(models.Model):
    menu_item = models.ForeignKey(MenuItem,on_delete=models.CASCADE,related_name='menuitem')
    ingredient = models.ForeignKey(Ingredient,on_delete=models.CASCADE,related_name="ingredient")
    quantity_required = models.DecimalField(max_digits=12, decimal_places=6, default=0)
+   
+   def get_absolute_url(self):
+        return "/menu"
+    
+   def enough(self):
+        return self.quantity_required <= self.ingredient.quantity
+
+
    def __str__(self):
        return 'For {}: {} {} {}'.format(self.menu_item.recipe, self.quantity_required, self.ingredient.units, self.ingredient.ingredient_name)
-#    def ingredient_reduction(self, quantity):
-#        if quantity <= 0:
-#            message =  "Insufficient amount"
-#            status = 403
-#        elif quantity < self.quantity_required:
-#             message = "You want to use more than you have"
-#             status = 403
-        
-#        else:
-#            self.quantity_required -= quantity
-#            self.save()
-#            message = f" you remain with {self.quantity}{self.ingredient_name}"
-#            status = 200
-#        return message,status    
+   
+class Purchase(models.Model):
+    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return "/purchase"
+
+    def revenue(self):
+        return self.menu_item.price
+
+    def cost(self):
+        total = 0
+        reqs = RecipeRequirement.objects.filter(menu_item=self.menu_item.id)
+        for req in reqs:
+            price = req.quantity_required * req.ingredient.unit_price
+            total += price
+        return total
+
+    def profit(self):
+        return self.revenue() - self.cost()
+
+    def __str__(self):
+        return f"Recipe:{self.menu_item.recipe}; Time:{self.timestamp}"
+
     
 
 
