@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'inventory',
     'bootstrap5',
     'django_bootstrap_icons',
-    # 'api',
-    # 'rest_framework',
     
 ]
 

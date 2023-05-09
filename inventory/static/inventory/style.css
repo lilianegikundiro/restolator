@@ -1,6 +1,8 @@
-#sidebarMenu{
-    width: fit-content;
-}
+
 body{
     background-color: black;
+    
 }
+a {
+    color: hotpink;
+  }
