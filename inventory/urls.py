@@ -4,7 +4,7 @@ from .views import *
 
 
 urlpatterns = [
-	path('', RedirectView.as_view(url=reverse_lazy('menu')), name='start_page'),
+	path('', RedirectView.as_view(url=reverse_lazy('registration')), name='start_page'),
 	path('inventory', InventoryView.as_view(), name='inventory'),
 	path('inventory/add', IngredientCreateView.as_view(), name='create_ingredient'),
 	path('inventory/<pk>', IngredientUpdateView.as_view(), name='update_ingredient'),

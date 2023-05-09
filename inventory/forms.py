@@ -17,7 +17,7 @@ class MenuForm(forms.ModelForm):
         fields = "__all__"
   
 class RegisterUserForm(UserCreationForm):
-	username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'uk-input'}))
+	username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'uk-input'}))
 	password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'uk-input'}))
 	password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(attrs={'class': 'uk-input'}))
 	class Meta:
