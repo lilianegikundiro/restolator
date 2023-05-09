@@ -98,7 +98,7 @@ class IngredientDeleteView(LoginRequiredMixin, DeleteView):
 class RegisterUser(CreateView):
 	form_class = RegisterUserForm
 	template_name = 'inventory/registration.html'
-	success_url = reverse_lazy('menu')
+	success_url = reverse_lazy('login')
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -107,7 +107,7 @@ class RegisterUser(CreateView):
 	def form_valid(self, form):	# login to account after registration
 		user = form.save()
 		login(self.request, user)
-		return redirect('menu')
+		return redirect('login')
 
 
 class LoginUser(LoginView):
