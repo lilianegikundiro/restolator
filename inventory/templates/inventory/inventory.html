@@ -1,7 +1,44 @@
 {% extends 'inventory/base.html' %}
 
 {% block content %}
-<div class="uk-grid-match uk-margin-remove-left" uk-grid>
+<style>
+
+#table {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	
+  }
+  th,td{
+	border: 1px solid #ddd;
+	padding: 20px;
+	
+  }
+  
+  tr {background-color: pink;}
+  tr:hover {background-color:#C5B4E3;}
+  th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	{% comment %} text-align: left; {% endcomment %}
+	background-color: #DE50A8;
+	color: white;
+	font-weight:bold;
+  }
+
+  a{
+	color: blue;
+  }
+
+  a:hover{
+	color: #AA336A;
+  }
+  h4{
+	color: black;
+  }
+  
+</style>
+<div class="uk-grid-match uk-margin-remove-left" uk-grid id="tables">
 
 	<div class="uk-width-1-6@m uk-invisible"></div>
 
@@ -16,13 +53,14 @@
 					<th class="uk-table-shrink">Unit</th>
 					<th>Price per unit</th>
 					<th>Actions</th>
-					<th></th>
+					
 				</tr>
 			</thead>
 			<tbody>
+				<h4>Your Ingredients</h4>
 				{% for ingredient in object_list %}
 				<tr>
-					<td><h3>{{ ingredient.ingredient_name }}</h3></td>
+					<td><h5>{{ ingredient.ingredient_name }}</h5></td>
 					<td>{{ ingredient.quantity }}</td>
 					<td class="uk-table-shrink">{{ ingredient.units }}</td>
 					<td>{{ ingredient.unit_price }}</td>

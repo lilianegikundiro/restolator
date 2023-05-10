@@ -130,7 +130,7 @@ def LogoutUser(request):
 def pageNotFound(request, exception):
 	return HttpResponseNotFound('<h1>ERROR 404</h1><br><p>Page Not Found</p>')
 
-class RecipeRequirementView(ListView):
+class RecipeRequirementView(LoginRequiredMixin,ListView):
 	model = RecipeRequirement
 	template_name = 'inventory/reciperequirement.html'
 
