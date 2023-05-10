@@ -23,7 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-e&sg(mnp*yjs_+-l1s36c07t4tjuxoc_3t2d&r3#lssq*n^lkr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+CSRF_COOKIE_DOMAIN = 'estolator.onrender.com'
+
 
 ALLOWED_HOSTS = ["*"]
 
@@ -33,6 +35,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -70,7 +73,7 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 CSRF_TRUSTED_ORIGINS = [
-    'https://restolator.onrender.com/',
+    'https://restolator.onrender.com',
 ]
 
 ROOT_URLCONF = 'restolator.urls'
