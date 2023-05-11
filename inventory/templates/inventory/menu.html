@@ -5,7 +5,45 @@
 {% endblock %}
 
 
+
 {% block content %}
+<style>
+
+	#table {
+		font-family: Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+		
+	  }
+	  th,td{
+		border: 1px solid #ddd;
+		padding: 20px;
+		
+	  }
+	  
+	  tr {background-color: pink;}
+	  tr:hover {background-color:#C5B4E3;}
+	  th {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		{% comment %} text-align: left; {% endcomment %}
+		background-color: #DE50A8;
+		color: white;
+		font-weight:bold;
+	  }
+	
+	  a{
+		color: blue;
+	  }
+	
+	  a:hover{
+		color: #AA336A;
+	  }
+	  h4{
+		color: black;
+	  }
+	  
+	</style>
 <div class="uk-grid-match uk-margin-remove-left" uk-grid>
 
 	<div class="uk-width-1-6@m uk-invisible"></div>
@@ -23,7 +61,7 @@
 			<tbody>
 				{% for item in object_list %}
 				<tr>
-					<td><h3>{{ item.recipe }}</h3></td>
+					<td><h5>{{ item.recipe }}</h5></td>
 					{% comment %} <td>{{ item.ingredients }}</td> {% endcomment %}
 					{% comment %} <td><button class="uk-button uk-button-default uk-button-small" href="{% url 'reciperequirement' reciperequirement.pk %}">Ingredients</button></td> {% endcomment %}
 					<td><a class="uk-button uk-button-default uk-button-small" href="{% url 'reciperequirement' %}">View Ingredients</a></td>
