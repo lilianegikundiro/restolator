@@ -2,8 +2,9 @@
 {% load static %}
 {% block content %}
 <form method="post">
+  <h4>Enter Sale:</h4>
   <div class="d-flex justify-content-center">
-    <h4>Enter Purchase:</h4>
+    
   </div>
   <div>
     {% csrf_token %}
@@ -13,7 +14,7 @@
       {% for item in menu_items %}
       <option value="{{item.recipe}}">{{item.recipe}}</option>
       {% endfor %}
-    <input id="purchase-btn" class="btn btn-primary btn-lg" type="submit" value="Add Purchase" />
+    <input id="purchase-btn" class="btn btn-primary btn-lg" type="submit" value="Add Sale" />
   </div>
 </form>
 {% endblock %}

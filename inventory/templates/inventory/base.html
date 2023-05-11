@@ -24,8 +24,8 @@
 		<div class="uk-navbar-right">
 			{% if request.user.is_authenticated %}
 			<ul class="uk-navbar-nav">
-				<li>{% bs_icon 'alarm' size='1.5em' %}<span ><a class="uk-text-bold" href="#">{{ user.username }}</span></a></li>
-				<li><a class="uk-text-bold" href="{% url 'logout' %}">Sign out</a></li>
+				<p label="Account">{% bs_icon 'person' size='1.5em' %}<span ><a class="uk-text-bold" href="#">{{ user.username }}</span></a></p>
+				<p label="Account">{% bs_icon 'box-arrow-left' size='1.5em' %}<span ><a class="uk-text-bold" href="{% url 'logout' %}">Sign out</span></a></p>
 			</ul>
 			{% else %}
 			<ul class="uk-navbar-nav">
@@ -36,19 +36,20 @@
 		</div>
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-4">
+			<a href="inventory" class="list-group-item list-group-item-action py-2 ripple"><i
+				class="fas fa-lock fa-fw me-3"></i><span>Ingredients</span></a>
           
-          <a href="menu" class="list-group-item list-group-item-action py-2 ripple active">
+          <a href="menu" class="list-group-item list-group-item-action py-2 ripple">
             <i class="fas fa-chart-area fa-fw me-3"></i><span>Menu</span>
           </a>
-          <a href="inventory" class="list-group-item list-group-item-action py-2 ripple"><i
-              class="fas fa-lock fa-fw me-3"></i><span>Ingredients</span></a>
+          
           <a href="reciperequirement/add" class="list-group-item list-group-item-action py-2 ripple"><i
               class="fas fa-chart-line fa-fw me-3"></i><span>Use Ingredients</span></a>
 			<a href="purchase/create" class="list-group-item list-group-item-action py-2 ripple"><i
 				class="fas fa-chart-line fa-fw me-3"></i><span>Record Sale</span></a>
 
 			<a href="purchase" class="list-group-item list-group-item-action py-2 ripple"><i
-					class="fas fa-chart-line fa-fw me-3"></i><span>All purchases</span></a>
+					class="fas fa-chart-line fa-fw me-3"></i><span>All Sales</span></a>
 
 			<a href="report" class="list-group-item list-group-item-action py-2 ripple"><i
 						class="fas fa-chart-line fa-fw me-3"></i><span>Financial report</span></a>
